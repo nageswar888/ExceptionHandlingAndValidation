@@ -1,5 +1,6 @@
 package com.nageswar.ValidationAndExceptionHandling.controller;
 
+import com.nageswar.ValidationAndExceptionHandling.dto.Employee;
 import com.nageswar.ValidationAndExceptionHandling.dto.UserRequest;
 import com.nageswar.ValidationAndExceptionHandling.entity.User;
 import com.nageswar.ValidationAndExceptionHandling.exception.UserNotFoundException;
@@ -10,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
@@ -35,5 +38,22 @@ public class UserController {
     @GetMapping("/{id}")
     public User getUser(@PathVariable int id) throws UserNotFoundException {
         return userService.getUser(id);
+    }
+    @GetMapping("/names")
+    List<?> getNames(){
+        List<Employee> list = new ArrayList<>();
+        list.add(new Employee("nag1",12,"Male"));
+        list.add(new Employee("nag2",19,"Female"));
+        list.add(new Employee("nag3",21,"Male"));
+        list.add(new Employee("nag4",16,"Female"));
+        list.add(new Employee("nag5",35,"Male"));
+        list.add(new Employee("nag6",33,"Female"));
+        /*return list.stream().filter(l -> l.getGender().equals("Male"))
+                .filter(l -> l.getAge()>18).collect(Collectors.toList());*/
+
+        return list.stream().filter(l -> l.getGender().equals("Male"))
+                .filter(l -> l.getAge()>18)
+                .filter(l -> l.getName().startsWith("na"))
+                .map(l -> l.getName()).collect(Collectors.toList());
     }
 }

@@ -7,6 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ValidationAndExceptionHandlingApplication {
 
 	public static void main(String[] args) {
+
+
+
 		SpringApplication.run(ValidationAndExceptionHandlingApplication.class, args);
 	}
 
