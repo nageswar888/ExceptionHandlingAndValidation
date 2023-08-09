@@ -30,15 +30,15 @@ public class UserController {
     public ResponseEntity<List<User>> getAllUsers(){
         return ResponseEntity.ok(userService.getAllUsers());
     }
-    /*@GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable int id){
-        return ResponseEntity.ok(userService.getUser(id));
-    }*/
-
     @GetMapping("/{id}")
+    public ResponseEntity<User> getUser(@PathVariable int id) throws UserNotFoundException {
+        return ResponseEntity.ok(userService.getUser(id));
+    }
+
+    /*@GetMapping("/{id}")
     public User getUser(@PathVariable int id) throws UserNotFoundException {
         return userService.getUser(id);
-    }
+    }*/
     @GetMapping("/names")
     List<?> getNames(){
         List<Employee> list = new ArrayList<>();
